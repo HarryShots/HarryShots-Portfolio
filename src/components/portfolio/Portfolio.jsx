@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./portfolio.css";
 // import IMG1 from "../../assets/portfolio1.jpg";
 // import IMG2 from "../../assets/portfolio2.jpg";
