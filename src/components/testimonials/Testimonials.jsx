@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./testimonials.css";
-import AVTR1 from "../../assets/Avatar 1.jpg";
-import AVTR2 from "../../assets/Avatar 2.jpg";
-import AVTR3 from "../../assets/Avatar 3.jpg";
-import AVTR4 from "../../assets/Avatar 4.png";
+// import AVTR1 from "../../assets/Avatar 1.jpg";
+// import AVTR2 from "../../assets/Avatar 2.jpg";
+// import AVTR3 from "../../assets/Avatar 3.jpg";
+// import AVTR4 from "../../assets/Avatar 4.png";
 
 // import Swiper core and required modules
 import { Navigation } from "swiper";
@@ -14,34 +15,27 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-const data = [
-  {
-    avatar: AVTR1,
-    name: "Kessy Durky",
-    review:
-      "I was so happy with the photos that HarryShots took of my wedding. He captured the day perfectly and I will cherish him forever.",
-  },
-  {
-    avatar: AVTR2,
-    name: "Brenda",
-    review:
-      "HarryShots is a true artist. He has a great eye for composition and lighting, and he knows how to capture the beauty in every moment.",
-  },
-  {
-    avatar: AVTR3,
-    name: "Malando Tina",
-    review:
-      "I was very happy with the work that HarryShots did on my website. He was able to take my vision and turn it into a reality. The website is exactly what I wanted and it looks great. I would definitely recommend HarryShots to anyone who is looking for a web developer.",
-  },
-  {
-    avatar: AVTR4,
-    name: "Makoun Glory",
-    review:
-      "Harry was very easy to work with. He was always responsive to my feedback and he was always willing to make changes to the content until I was happy with the results.",
-  },
-];
+
 
 const Testimonials = () => {
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://rich-puce-crocodile-slip.cyclic.app/api/testimonials").then(response => {
+      const formattedData = response.data.data.map((item => ({
+        id: item._id,
+        avatar: item.avatar,
+        name: item.name,
+        review: item.review
+      })));
+      setData(formattedData)
+    }).catch(error => {
+      console.log("Error Fetching Portfolio Data: ", error);
+    })
+  }, [])
+
+
   return (
     <section id="testimonials">
       <h5>Review from clients</h5>
