@@ -4,7 +4,7 @@ import { TfiEmail } from 'react-icons/tfi'
 import { FaFacebookMessenger } from 'react-icons/fa'
 import { IoLogoWhatsapp } from 'react-icons/io'
 import { useRef } from 'react';
-import emailjs from 'emailjs-com'
+import emailjs from '@emailjs/browser'
 
 const Contact = () => {
   const form = useRef();
